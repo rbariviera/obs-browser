@@ -376,6 +376,10 @@ void BrowserClient::OnLoadEnd(CefRefPtr<CefBrowser>, CefRefPtr<CefFrame> frame,
 		script += "document.querySelector('head').appendChild(obsCSS);";
 
 		frame->ExecuteJavaScript(script, "", 0);
+
+		std::string javascript;
+		javascript = bs->javascript;
+		frame->ExecuteJavaScript(javascript, frame->GetURL(), 0);
 	}
 }
 
