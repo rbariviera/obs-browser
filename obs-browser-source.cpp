@@ -501,7 +501,8 @@ void BrowserSource::Update(obs_data_t *settings)
 		n_restart = obs_data_get_bool(settings, "restart_when_active");
 		n_css = obs_data_get_string(settings, "css");
 		n_javascript = obs_data_get_string(settings, "javascript");
-		n_url = obs_data_get_string(settings, n_is_local ? "local_file" : "url");
+		n_url = obs_data_get_string(settings,
+					    n_is_local ? "local_file" : "url");
 		n_reroute = obs_data_get_bool(settings, "reroute_audio");
 		n_webpage_control_level =
 			static_cast<ControlLevel>(obs_data_get_int(settings, "webpage_control_level"));
@@ -546,9 +547,11 @@ void BrowserSource::Update(obs_data_t *settings)
 		}
 #endif
 
-		if (n_is_local == is_local && n_fps_custom == fps_custom && n_fps == fps &&
-		    n_shutdown == shutdown_on_invisible && n_restart == restart && n_css == css && n_url == url &&
-		    n_reroute == reroute_audio && n_javascript == javascript && n_webpage_control_level == webpage_control_level) {
+		if (n_is_local == is_local && n_fps_custom == fps_custom &&
+		    n_fps == fps && n_shutdown == shutdown_on_invisible &&
+		    n_restart == restart && n_css == css && n_url == url &&
+		    n_reroute == reroute_audio && n_javascript == javascript &&
+		    n_webpage_control_level == webpage_control_level) {
 
 			if (n_width == width && n_height == height)
 				return;
