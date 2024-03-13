@@ -478,7 +478,8 @@ void BrowserSource::Update(obs_data_t *settings)
 		n_restart = obs_data_get_bool(settings, "restart_when_active");
 		n_css = obs_data_get_string(settings, "css");
 		n_javascript = obs_data_get_string(settings, "javascript");
-		n_url = obs_data_get_string(settings, n_is_local ? "local_file" : "url");
+		n_url = obs_data_get_string(settings,
+					    n_is_local ? "local_file" : "url");
 		n_reroute = obs_data_get_bool(settings, "reroute_audio");
 		n_webpage_control_level =
 			static_cast<ControlLevel>(obs_data_get_int(settings, "webpage_control_level"));
