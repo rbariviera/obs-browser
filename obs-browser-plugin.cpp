@@ -136,6 +136,7 @@ static void browser_source_get_defaults(obs_data_t *settings)
 	obs_data_set_default_bool(settings, "restart_when_active", false);
 	obs_data_set_default_int(settings, "webpage_control_level", (int)DEFAULT_CONTROL_LEVEL);
 	obs_data_set_default_string(settings, "css", default_css);
+	obs_data_set_default_string(settings, "javascript", "");
 	obs_data_set_default_bool(settings, "reroute_audio", false);
 }
 
@@ -196,7 +197,10 @@ static obs_properties_t *browser_source_get_properties(void *data)
 
 	obs_properties_add_int(props, "fps", obs_module_text("FPS"), 1, 60, 1);
 
-	obs_property_t *p = obs_properties_add_text(props, "css", obs_module_text("CSS"), OBS_TEXT_MULTILINE);
+	obs_property_t *p = obs_properties_add_text(
+		props, "css", obs_module_text("CSS"), OBS_TEXT_MULTILINE);
+	obs_properties_add_text(props, "javascript",
+		obs_module_text("Javascript"), OBS_TEXT_MULTILINE);
 	obs_property_text_set_monospace(p, true);
 	obs_properties_add_bool(props, "shutdown", obs_module_text("ShutdownSourceNotVisible"));
 	obs_properties_add_bool(props, "restart_when_active", obs_module_text("RefreshBrowserActive"));
