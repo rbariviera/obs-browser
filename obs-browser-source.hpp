@@ -65,6 +65,7 @@ struct BrowserSource {
 
 	std::string url;
 	std::string css;
+	std::string javascript;
 	gs_texture_t *texture = nullptr;
 	gs_texture_t *extra_texture = nullptr;
 	uint32_t last_cx = 0;
