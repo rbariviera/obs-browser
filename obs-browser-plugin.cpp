@@ -56,7 +56,6 @@
 #endif
 
 #if !defined(_WIN32) && !defined(__APPLE__)
-#include <glad/glad.h>
 #include "drm-format.hpp"
 #endif
 
@@ -721,9 +720,11 @@ static void check_hwaccel_support(void)
 	const char *glVersion = NULL;
 
 	obs_enter_graphics();
-	gladLoadGL();
-	glVersion = (const char *)glGetString(GL_VERSION);
+	glVersion = gs_get_driver_version();
 	obs_leave_graphics();
+
+	if (!glVersion)
+		return;
 
 	if (strstr(glVersion, "NVIDIA") != NULL) {
 		hwaccel = false;
