@@ -505,26 +505,9 @@ void BrowserSource::Update(obs_data_t *settings)
 			n_url = "http://absolute/" + n_url;
 		}
 
-<<<<<<< HEAD
 		if (n_is_local == is_local && n_fps_custom == fps_custom && n_fps == fps &&
 		    n_shutdown == shutdown_on_invisible && n_restart == restart && n_css == css && n_url == url &&
 		    n_reroute == reroute_audio && n_javascript == javascript && n_webpage_control_level == webpage_control_level) {
-=======
-#if ENABLE_LOCAL_FILE_URL_SCHEME
-		if (astrcmpi_n(n_url.c_str(), "http://absolute/", 16) == 0) {
-			/* Replace http://absolute/ URLs with file://
-			 * URLs if file:// URLs are enabled */
-			n_url = "file:///" + n_url.substr(16);
-			n_is_local = true;
-		}
-#endif
-
-		if (n_is_local == is_local && n_fps_custom == fps_custom &&
-		    n_fps == fps && n_shutdown == shutdown_on_invisible &&
-		    n_restart == restart && n_css == css && n_url == url &&
-		    n_reroute == reroute_audio && n_javascript == javascript &&
-		    n_webpage_control_level == webpage_control_level) {
->>>>>>> 7ab96fc (add custom Javascript)
 
 			if (n_width == width && n_height == height)
 				return;
