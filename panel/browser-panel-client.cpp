@@ -38,6 +38,13 @@ CefRefPtr<CefDisplayHandler> QCefBrowserClient::GetDisplayHandler()
 	return this;
 }
 
+#if CHROME_VERSION_BUILD >= 6533
+CefRefPtr<CefCommandHandler> QCefBrowserClient::GetCommandHandler()
+{
+	return this;
+}
+#endif
+
 CefRefPtr<CefRequestHandler> QCefBrowserClient::GetRequestHandler()
 {
 	return this;
@@ -68,10 +75,18 @@ CefRefPtr<CefJSDialogHandler> QCefBrowserClient::GetJSDialogHandler()
 	return this;
 }
 
+/* CefCommandHandler */
+#if CHROME_VERSION_BUILD >= 6533
+bool QCefBrowserClient::OnChromeCommand(CefRefPtr<CefBrowser>, int, cef_window_open_disposition_t)
+{
+	return true;
+}
+#endif
+
 /* CefDisplayHandler */
 void QCefBrowserClient::OnTitleChange(CefRefPtr<CefBrowser> browser, const CefString &title)
 {
-	if (widget && widget->cefBrowser->IsSame(browser)) {
+	if (widget && widget->cefBrowser && widget->cefBrowser->IsSame(browser)) {
 		std::string str_title = title;
 		QString qt_title = QString::fromUtf8(str_title.c_str());
 		QMetaObject::invokeMethod(widget, "titleChanged", Q_ARG(QString, qt_title));
@@ -226,7 +241,7 @@ void QCefBrowserClient::OnBeforeClose(CefRefPtr<CefBrowser>)
 
 bool QCefBrowserClient::OnSetFocus(CefRefPtr<CefBrowser>, CefFocusHandler::FocusSource source)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0) && QT_VERSION < QT_VERSION_CHECK(6, 11, 1)
 	/* Workaround for browser docks flashing/hanging at startup with Qt 6.8.x, introduced
 	 * by commit https://code.qt.io/cgit/qt/qt5.git/commit/?id=bab1fecd556ea561c4a89686293116741acfa1b4.
 	 * Refer to https://bugreports.qt.io/browse/QTBUG-136165.

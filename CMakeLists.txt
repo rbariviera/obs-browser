@@ -25,12 +25,15 @@ target_sources(
           browser-app.hpp
           browser-client.cpp
           browser-client.hpp
+          browser-dummy-client.cpp
+          browser-dummy-client.hpp
           browser-scheme.cpp
           browser-scheme.hpp
           browser-version.h
           cef-headers.hpp
           deps/base64/base64.cpp
           deps/base64/base64.hpp
+          deps/ip-string.hpp
           deps/signal-restore.cpp
           deps/signal-restore.hpp
           deps/wide-string.cpp
@@ -41,7 +44,7 @@ target_sources(
 
 target_include_directories(obs-browser PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/deps")
 
-target_compile_features(obs-browser PRIVATE cxx_std_17)
+target_compile_features(obs-browser PRIVATE cxx_std_20)
 target_link_libraries(obs-browser PRIVATE OBS::libobs OBS::frontend-api OBS::websocket-api nlohmann_json::nlohmann_json)
 
 if(OS_WINDOWS)
